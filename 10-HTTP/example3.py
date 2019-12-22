@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+from http.server import BaseHTTPRequestHandler,HTTPServer
 from os import curdir, sep
 import cgi
 
@@ -58,7 +58,7 @@ class myHandler(BaseHTTPRequestHandler):
 		                 'CONTENT_TYPE':self.headers['Content-Type'],
 			})
 
-			print "Your name is: %s" % form["your_name"].value
+			print("Your name is: %s" % form["your_name"].value)
 			self.send_response(200)
 			self.end_headers()
 			self.wfile.write("Thanks %s !" % form["your_name"].value)
@@ -69,11 +69,11 @@ try:
 	#Create a web server and define the handler to manage the
 	#incoming request
 	server = HTTPServer(('', PORT_NUMBER), myHandler)
-	print 'Started httpserver on port ' , PORT_NUMBER
+	print('Started httpserver on port ' , PORT_NUMBER)
 	
 	#Wait forever for incoming htto requests
 	server.serve_forever()
 
 except KeyboardInterrupt:
-	print '^C received, shutting down the web server'
+	print('^C received, shutting down the web server')
 	server.socket.close()
