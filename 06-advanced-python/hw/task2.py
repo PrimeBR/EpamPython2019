@@ -11,7 +11,6 @@ https://ru.wikipedia.org/wiki/%D0%9A%D0%B2%D0%B0%D1%82%D0%B5%D1%80%D0%BD%D0%B8%D
 По желанию:
 - взаимодействие с числами других типов
 """
-<<<<<<< HEAD
 
 
 class Quaternion:
@@ -69,8 +68,4 @@ test6 = test1 / test2
 test7 = test1
 test8 = abs(test1)
 print(test6)
-=======
 
-class Quaternion:
-    pass
->>>>>>> upsteam/master
