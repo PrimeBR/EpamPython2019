@@ -2,11 +2,10 @@
 Написать тесты(pytest or unittest) к предыдущим 2 заданиям, запустив которые, я бы смог бы проверить их корректность
 Обязательно проверить всю критическую функциональность
 """
-<<<<<<< HEAD
 import unittest
 import time
-from task2 import Message
-from task1 import SiamObj
+from hw.task2 import Message
+from hw.task1 import SiamObj
 
 
 class SiamTest(unittest.TestCase):
@@ -57,5 +56,3 @@ class PropertyTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-=======
->>>>>>> upsteam/master

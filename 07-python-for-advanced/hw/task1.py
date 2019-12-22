@@ -9,27 +9,24 @@
     того же класса
 
 
->>> unit1 = SiamObj('1', '2', a=1)
->>> unit2 = SiamObj('1', '2', a=1)
->>> unit1 is unit2
+unit1 = SiamObj('1', '2', a=1)
+unit2 = SiamObj('1', '2', a=1)
+unit1 is unit2
 True
->>> unit3 = SiamObj('2', '2', a=1)
->>> unit3.connect('1', '2', 1).a = 2
->>> unit2.a == 2
+unit3 = SiamObj('2', '2', a=1)
+unit3.connect('1', '2', 1).a = 2
+unit2.a == 2
 True
->>> pool = unit3.pool
-<<<<<<< HEAD
->>> print(len(b))
+pool = unit3.pool
+print(len(b))
 =======
->>> print(len(pool))
->>>>>>> upsteam/master
+print(len(pool))
 2
->>> del unit3
->>> print(len(pool))
+del unit3
+print(len(pool))
 1
 
 """
-<<<<<<< HEAD
 import weakref
 
 
@@ -88,8 +85,3 @@ if __name__ == '__main__':
     del test3
     print(len(pool))
 
-
-
-
-=======
->>>>>>> upsteam/master

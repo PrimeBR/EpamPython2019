@@ -10,7 +10,6 @@ import time
 import uuid
 
 
-<<<<<<< HEAD
 def timer_property(t=None):
     cache = []
     time_limit = time.time()
@@ -64,8 +63,6 @@ def timer_property(t=None):
     return Property
 
 
-=======
->>>>>>> upsteam/master
 class Message:
 
     @timer_property(t=10)
@@ -81,16 +78,11 @@ class Message:
         """
         Return random string
         """
-<<<<<<< HEAD
         return uuid.uuid4().hex
-=======
-        return uuid.uuid4().get_hex()
->>>>>>> upsteam/master
 
 
 if __name__ == '__main__':
     m = Message()
-<<<<<<< HEAD
     message = m.msg
     print(m.msg == message)
     time.sleep(1)
@@ -100,14 +92,7 @@ if __name__ == '__main__':
     message = m.msg
     time.sleep(1)
     print(m.msg == message)
-    # m.msg = 'test_message'
-    # initial = m.msg
-    # assert initial is m.msg
+    # initial = m.read
+    # assert initial is m.read
     # time.sleep(10)
-    # assert initial is not m.msg
-=======
-    initial = m.read
-    assert initial is m.read
-    time.sleep(10)
-    assert initial is not m.read
->>>>>>> upsteam/master
+    # assert initial is not m.read
