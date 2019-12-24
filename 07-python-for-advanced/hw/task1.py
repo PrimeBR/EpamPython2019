@@ -46,10 +46,21 @@ class Meta(type):
                 if i.__dict__ == _args:
                     return i
 
+    @staticmethod
+    def args_collector(inst, *args, **kwargs):
+        for key, value in kwargs.items():
+            inst.__dict__[key] = value
+        if len(args) > 2:
+            inst.__dict__.update({'a': args[-1]})
+            inst.__dict__.update({'args': args[:-1]})
+        else:
+            inst.__dict__.update({'args': args})
+
     def __call__(cls, *args, **kwargs):
         setattr(cls, 'connect', cls.connect)
         setattr(cls, 'pool', cls._inst)
         _cls = super().__call__(*args, **kwargs)
+        cls.args_collector(_cls, *args, **kwargs)
         for item in cls._inst:
             if type(item) != type(_cls):
                 cls._inst.add(_cls)
@@ -65,13 +76,7 @@ class Meta(type):
 
 class SiamObj(metaclass=Meta):
     def __init__(self, *args, **kwargs):
-        for key, value in kwargs.items():
-            self.__dict__[key] = value
-        if len(args) > 2:
-            self.__dict__.update({'a': args[-1]})
-            self.__dict__.update({'args': args[:-1]})
-        else:
-            self.__dict__.update({'args': args})
+        pass
 
 
 if __name__ == '__main__':
