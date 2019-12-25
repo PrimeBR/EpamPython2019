@@ -1,5 +1,5 @@
 import datetime
-from collections import namedtuple
+from collections import namedtuple, OrderedDict
 Cache = namedtuple('Cache', ['time', 'count', 'func_name'])
 cache1 = {}
 cache2 = []
@@ -83,3 +83,9 @@ def recursion_fib(n):
 print(fib_with_space_opt(20), cache1)
 print(recursion_fib(20), cache2)
 print(dp_fib(20), cache3)
+results = [cache1, dict(*cache2), cache3]
+best = results[0]
+for i in results:
+    if best['time'] > i['time']:
+        best = i
+print(f'Best way of fib {best["func_name"]}')
