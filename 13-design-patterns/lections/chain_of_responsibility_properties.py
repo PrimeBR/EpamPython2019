@@ -153,7 +153,7 @@ def repair_car(car):
     fuel_handler.handle(car)
 
 
-car_to_check = Car(fuel_level=25, wheels_broken=2, oil_level=10, brake_correct=False)
+car_to_check = Car(fuel_level=250, wheels_broken=2, oil_level=10, brake_correct=False)
 # wrong_car_to_check = Car(fuel_level=125, wheels_broken=2, oil_level=10, brake_correct=False)
 
 repair_car(car_to_check)

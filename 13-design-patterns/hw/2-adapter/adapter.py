@@ -89,15 +89,28 @@ class DocumentsHandler:
             document_ids = [document_ids]
 
         loaded_documents = []
-
         for doc_id in document_ids:
             result = self._service.get_document(doc_id)
             if result['status'] == 'success':
                 loaded_documents.append(result['document'])
             if result['status'] == 'error':
                 print("Couldn't load document with {} ID: {}".format(doc_id, result['msg']))
-
         return loaded_documents
+
+
+class Adapter(DocumentsHandler):
+
+    def __init__(self, adaptee):
+        self.adaptee = adaptee
+
+    def upload_documents(self, documents):
+        for i, doc in enumerate(documents):
+            documents[i] = doc.replace('.xml', '.json')
+
+        return self.adaptee.upload_documents(documents)
+
+    def get_documents(self, document_ids):
+        return self.adaptee.get_documents(document_ids)
 
 
 def client_code(documents_handler):
@@ -115,5 +128,5 @@ if __name__ == "__main__":
     app = App()
     app.documents_handler = DocumentsHandler(StoreService())
     # Реализуйте класс Adapter и раскомментируйте строку ниже
-    # app.documents_handler = Adapter(app.documents_handler)
+    app.documents_handler = Adapter(app.documents_handler)
     client_code(app.documents_handler)

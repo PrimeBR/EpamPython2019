@@ -49,3 +49,81 @@ Dear John, there is new playlist on 'All about dogs' channel: 'Dogs nutrition'
 Dear Erica, there is new playlist on 'All about dogs' channel: 'Dogs nutrition'
 
 """
+
+from abc import ABC, abstractmethod
+from typing import List, Dict
+
+
+class Observer(ABC):
+
+    @abstractmethod
+    def update(self):
+        pass
+
+
+class Observable(ABC):
+
+    def __init__(self):
+        self.observers = list()
+
+    def subscribe(self, user: Observer):
+        self.observers.append(user)
+
+    @abstractmethod
+    def publish_video(self, video: str):
+        pass
+
+    @abstractmethod
+    def publish_playlist(self, playlist: Dict[str, List[str]]):
+        pass
+
+
+class MyTubeChannel(Observable):
+    name: str = ''
+    owner: str = ''
+    playlists: Dict[str, List[str]] = {}
+
+    def __init__(self, channel_name: str, channel_owner: str):
+        self.name = channel_name
+        self.owner = channel_owner
+        super().__init__()
+
+    def publish_video(self, video: str):
+        for observer in self.observers:
+            observer.update(f'there is new video on "{self.name}" channel: "{video}"')
+
+    def publish_playlist(self, playlist: Dict[str, List[str]]):
+        self.playlists.update(playlist)
+        for key, value in playlist.items():
+            for observer in self.observers:
+                observer.update(f'there is new playlist on "{self.name}" channel: "{key}"')
+
+
+class MyTubeUser(Observer):
+    _name: str = ''
+
+    def __init__(self, user_name: str):
+        self._name = user_name
+
+    def update(self, message: str):
+        print(f'Dear {self._name}, {message}')
+
+
+if __name__ == '__main__':
+    matt = MyTubeUser('Matt')
+    john = MyTubeUser('John')
+    erica = MyTubeUser('Erica')
+
+    dogs_life = MyTubeChannel('All about dogs', matt)
+    dogs_life.subscribe(john)
+    dogs_life.subscribe(erica)
+
+    dogs_nutrition_videos = ['What do dogs eat?', 'Which Pedigree pack to choose?']
+    dogs_nutrition_playlist = {'Dogs nutrition': dogs_nutrition_videos}
+
+    for video in dogs_nutrition_videos:
+        dogs_life.publish_video(video)
+
+    dogs_life.publish_playlist(dogs_nutrition_playlist)
+
+
