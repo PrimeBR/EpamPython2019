@@ -84,8 +84,12 @@ print(fib_with_space_opt(20), cache1)
 print(recursion_fib(20), cache2)
 print(dp_fib(20), cache3)
 results = [cache1, dict(*cache2), cache3]
-best = results[0]
+best_time = results[0]
+best_count = results[0]
 for i in results:
-    if best['time'] > i['time']:
-        best = i
-print(f'Best way of fib {best["func_name"]}')
+    if best_time['time'] > i['time']:
+        best_time = i
+    if best_count['count'] > i['count']:
+        best_count = i
+print(f'Best way of time: {best_time["func_name"]}')
+print(f'Best way of iterations: {best_count["func_name"]}')
