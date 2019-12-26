@@ -1,13 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 
-HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36', 'Cookie': 'c7t91v507uoccupia84b2eqv015gknta'}
-DATA = {'mode': 'login', 'username': 'PrimeBR', 'password': '_GdA6A9vkLDkfTr'}
+HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'}
 
 
 def get_posts(text, s):
     for i in range(1, 11):
-        response = s.get(f'https://pikabu.ru/best?page={i}', headers=HEADERS)
+        response = s.get(f'https://pikabu.ru/hot/subs/actual?page={i}', headers=HEADERS)
         text.append(response.text)
 
 
@@ -26,7 +25,9 @@ def get_popular_tags(text):
 
 if __name__ == '__main__':
     s = requests.Session()
-    r = s.post('https://pikabu.ru/ajax/auth.php', data=DATA, headers=HEADERS)
+    with open('./cookies.txt') as file:
+        cookies = file.read()
+        HEADERS['Cookie'] = cookies
     text = []
     get_posts(text, s)
     get_popular_tags(text)
