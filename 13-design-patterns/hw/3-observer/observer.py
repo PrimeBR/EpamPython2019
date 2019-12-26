@@ -57,7 +57,7 @@ from typing import List, Dict
 class Observer(ABC):
 
     @abstractmethod
-    def update(self):
+    def update(self, message: str):
         pass
 
 
@@ -80,10 +80,10 @@ class Observable(ABC):
 
 class MyTubeChannel(Observable):
     name: str = ''
-    owner: str = ''
+    owner: 'MyTubeUser' = ''
     playlists: Dict[str, List[str]] = {}
 
-    def __init__(self, channel_name: str, channel_owner: str):
+    def __init__(self, channel_name: str, channel_owner: 'MyTubeUser'):
         self.name = channel_name
         self.owner = channel_owner
         super().__init__()

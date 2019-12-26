@@ -13,7 +13,7 @@ import yaml
 
 class AbstractFirst(ABC):
     @abstractmethod
-    def make_first(self):
+    def make_first(self, menu):
         pass
 
 

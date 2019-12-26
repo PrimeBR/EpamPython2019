@@ -101,16 +101,16 @@ class DocumentsHandler:
 class Adapter(DocumentsHandler):
 
     def __init__(self, adaptee):
-        self.adaptee = adaptee
+        super(Adapter, self).__init__(adaptee)
 
     def upload_documents(self, documents):
         for i, doc in enumerate(documents):
             documents[i] = doc.replace('.xml', '.json')
 
-        return self.adaptee.upload_documents(documents)
+        return self._service.upload_documents(documents)
 
     def get_documents(self, document_ids):
-        return self.adaptee.get_documents(document_ids)
+        return self._service.get_documents(document_ids)
 
 
 def client_code(documents_handler):
