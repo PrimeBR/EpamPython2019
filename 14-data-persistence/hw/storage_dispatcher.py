@@ -14,7 +14,7 @@ def redis_handler(data, status):
 
 
 def mongo_handler(data, status):
-    client = pymongo.MongoClient()
+    client = pymongo.MongoClient(host='localhost', port=27017)
     if status == 1:
         db = client['test_db']
         coll = db['test_coll']
