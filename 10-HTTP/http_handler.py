@@ -32,7 +32,7 @@ if __name__ == '__main__':
     s = requests.Session()
     with open('./cookies.txt') as file:
         cookies = file.read()
-        HEADERS['Cookie'] = cookies
+        HEADERS['Cookie'] = cookies.strip()
     text = []
     get_posts(text, s)
     get_popular_tags(text)
